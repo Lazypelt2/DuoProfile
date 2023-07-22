@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/DuoProfile/static/css/main.e6c13ad2.css",
+    "main.js": "/DuoProfile/static/js/main.46875ba7.js",
+    "static/js/787.b217359d.chunk.js": "/DuoProfile/static/js/787.b217359d.chunk.js",
+    "index.html": "/DuoProfile/index.html",
+    "main.e6c13ad2.css.map": "/DuoProfile/static/css/main.e6c13ad2.css.map",
+    "main.46875ba7.js.map": "/DuoProfile/static/js/main.46875ba7.js.map",
+    "787.b217359d.chunk.js.map": "/DuoProfile/static/js/787.b217359d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.46875ba7.js"
+  ]
+}

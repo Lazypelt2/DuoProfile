@@ -170,3 +170,8 @@ section {
 .search-box .search-bar:focus {
     background-color: rgba(255, 255, 255, 0.75);
 }
+
+.svgFlag{
+    height: 40px;
+    width: 75px;
+}

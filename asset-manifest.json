@@ -1,15 +1,15 @@
 {
-  "main.css": "/duoprofiles/static/css/main.8d32c17b.chunk.css",
-  "main.js": "/duoprofiles/static/js/main.061306d2.chunk.js",
-  "main.js.map": "/duoprofiles/static/js/main.061306d2.chunk.js.map",
-  "static/js/1.927bd4ba.chunk.js": "/duoprofiles/static/js/1.927bd4ba.chunk.js",
-  "static/js/1.927bd4ba.chunk.js.map": "/duoprofiles/static/js/1.927bd4ba.chunk.js.map",
-  "static/js/2.0259e6aa.chunk.js": "/duoprofiles/static/js/2.0259e6aa.chunk.js",
-  "static/js/2.0259e6aa.chunk.js.map": "/duoprofiles/static/js/2.0259e6aa.chunk.js.map",
-  "runtime~main.js": "/duoprofiles/static/js/runtime~main.0123f91a.js",
-  "runtime~main.js.map": "/duoprofiles/static/js/runtime~main.0123f91a.js.map",
-  "static/css/main.8d32c17b.chunk.css.map": "/duoprofiles/static/css/main.8d32c17b.chunk.css.map",
-  "index.html": "/duoprofiles/index.html",
-  "precache-manifest.a294075af114cb8f594cf693989ac6fe.js": "/duoprofiles/precache-manifest.a294075af114cb8f594cf693989ac6fe.js",
-  "service-worker.js": "/duoprofiles/service-worker.js"
+  "main.css": "/static/css/main.8d32c17b.chunk.css",
+  "main.js": "/static/js/main.061306d2.chunk.js",
+  "main.js.map": "/static/js/main.061306d2.chunk.js.map",
+  "static/js/1.927bd4ba.chunk.js": "/static/js/1.927bd4ba.chunk.js",
+  "static/js/1.927bd4ba.chunk.js.map": "/static/js/1.927bd4ba.chunk.js.map",
+  "static/js/2.0259e6aa.chunk.js": "/static/js/2.0259e6aa.chunk.js",
+  "static/js/2.0259e6aa.chunk.js.map": "/static/js/2.0259e6aa.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.439225c8.js",
+  "runtime~main.js.map": "/static/js/runtime~main.439225c8.js.map",
+  "static/css/main.8d32c17b.chunk.css.map": "/static/css/main.8d32c17b.chunk.css.map",
+  "index.html": "/index.html",
+  "precache-manifest.c491598905b76ffa41a032440337e685.js": "/precache-manifest.c491598905b76ffa41a032440337e685.js",
+  "service-worker.js": "/service-worker.js"
 }

@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from "react";
 import $ from 'jquery';
 import DataTable from 'datatables.net';
+import skillsJson from './all_skills.json'
 
-
+const allSkills = skillsJson.all_skills;
 const api = {
-	base: "https://lazypelt.com/api/"
+	base: "https://server.lazypelt.com/api/"
 }
 
 function capitalizeFirstLetter(arr) {
@@ -15,7 +16,7 @@ function capitalizeFirstLetter(arr) {
 	return result;
 }
 
-function inventoryDiv(inv) {
+function buildInventoryDiv(inv) {
 	var result = "";
 	for (const key in inv) {
 		if (inv[key]) {
@@ -33,8 +34,30 @@ function inventoryDiv(inv) {
 	return result;
 }
 
-function langTableDiv(courses) {
+function buildActivityDiv(u) {
+
 	var result = "";
+	u.calendar.sort(function(a, b){return b.timestamp-a.timestamp});
+	u.calendar.forEach(entry => {
+		var skill = allSkills.filter(s => s.id == entry.skill_id)[0];
+
+		result += `<div className='col-sm-4'>
+				<p>
+						<b>
+							${new Date(entry.datetime).toLocaleString("de-DE")}:
+							
+						</b> ${skill ? skill.name : "unknown lesson/practice"} ${(entry.event_type ? "(" + entry.event_type + ")": "")} || <b>${entry.improvement} XP</b>
+				</p>
+			</div>`;
+	});
+
+	return result;
+}
+
+
+function buildLangTableDiv(courses) {
+	var result = "";	
+	courses.sort(function(a, b){return b.xp-a.xp});
 
 	courses
 		.filter((c) => c.xp > 0)
@@ -185,6 +208,7 @@ const LangString = {
 	"ht": "Haitian",
 	"tl": "Tagalog",
 	"zu": "Zulu",
+	"xh": "Xhosa"
 };
 
 function App() {
@@ -193,6 +217,7 @@ function App() {
 	const [user, setUser] = useState({});
 	const [invDiv, setInvDiv] = useState('');
 	const [langTableRows, setLangTableRows] = useState('');
+	const [activityDiv, setActivityDiv] = useState('');
 
 
 	const search = evt => {
@@ -200,7 +225,7 @@ function App() {
 
 			var expr = /^[a-zA-Z0-9._]*$/;
 			if (!expr.test(query)) {
-				setUser({ username: "user_not_found" }); //add invalid input
+				setUser({ username: "invalid_input" }); //add invalid input
 				setQuery('');
 				return;
 			}
@@ -214,9 +239,11 @@ function App() {
 							result.language_data.currentlang = result.language_data[key];
 						}
 
-						setInvDiv(inventoryDiv(result.inventory));
+						setInvDiv(buildInventoryDiv(result.inventory));
 
-						setLangTableRows(langTableDiv(result.alt.courses));
+						setLangTableRows(buildLangTableDiv(result.alt.courses));
+
+						setActivityDiv(buildActivityDiv(result));
 
 						setUser(result);
 					}
@@ -232,6 +259,7 @@ function App() {
 	return (
 		<div>
 			<main>
+				{/*Search box*/}
 				<div className="search-box">
 					<input
 						type="text"
@@ -243,7 +271,8 @@ function App() {
 					/>
 				</div>
 
-				{(typeof user.username != "undefined") ? (user.username === "user_not_found") ?
+				{(typeof user.username != "undefined") ? 
+				 (user.username === "user_not_found") ?
 					(
 						<div>
 							<section style={{ backgroundcolor: "#101010" }}>
@@ -253,7 +282,19 @@ function App() {
 								</div>
 							</section>
 						</div>
-					) : (
+					) : 
+					(user.username === "invalid_input") ? 
+					(
+						<div>
+						<section style={{ backgroundcolor: "#101010" }}>
+							<div className="container py-5" style={{ justifyContent: "center", textAlign: "center" }}>
+
+								<div>Invalid input, please try a valid username.</div>
+							</div>
+						</section>
+					</div>
+
+					) :	(
 						<div>
 							<section style={{ backgroundcolor: "#101010" }}>
 								<div className="container py-5">
@@ -349,7 +390,7 @@ function App() {
 											<div className="card mb-4">
 												<div className="card-header mb-0 pb-0" id="headerlessonstats" data-toggle="collapse" data-target="#collapseLessonStats" aria-expanded="true" aria-controls="collapseLessonStats">
 													<h5>
-														Average Lesson Stats (last {user.XPStats.Count} Days)
+														Average Lesson Stats (last {user.XPStats.length} Days)
 													</h5>
 												</div>
 												<div id="collapseLessonStats" className="collapse show" aria-labelledby="headerlessonstats">
@@ -417,7 +458,7 @@ function App() {
 														Privacy
 													</h5>
 												</div>
-												<div id="collapsePrivacy" className="collapse show" aria-labelledby="headerPrivacy">
+												<div id="collapsePrivacy" className="collapse" aria-labelledby="headerPrivacy">
 													<div className="card-body">
 														<div className="row">
 															<div className="col-sm-4">
@@ -455,7 +496,7 @@ function App() {
 														Inventory
 													</h5>
 												</div>
-												<div id="collapseInventory" className="collapse show" aria-labelledby="headerInventory">
+												<div id="collapseInventory" className="collapse" aria-labelledby="headerInventory">
 													<div className="card-body">
 														<div className="row" dangerouslySetInnerHTML={{ __html: invDiv }}>
 														</div>
@@ -473,7 +514,7 @@ function App() {
 														Classrooms
 													</h5>
 												</div>
-												<div id="collapseClassrooms" className="collapse show" aria-labelledby="headerClassrooms">
+												<div id="collapseClassrooms" className="collapse" aria-labelledby="headerClassrooms">
 													<div className="card-body">
 														<div className="row">
 															<div className="col-sm-4">
@@ -505,7 +546,7 @@ function App() {
 														Connections
 													</h5>
 												</div>
-												<div id="collapseConnections" className="collapse show" aria-labelledby="headerConnections">
+												<div id="collapseConnections" className="collapse" aria-labelledby="headerConnections">
 													<div className="card-body">
 														<div className="row">
 															<div className="row">
@@ -534,7 +575,7 @@ function App() {
 														Other
 													</h5>
 												</div>
-												<div id="collapseOther" className="collapse show" aria-labelledby="headerOther">
+												<div id="collapseOther" className="collapse" aria-labelledby="headerOther">
 													<div className="card-body">
 														{(user.alt.globalAmbassadorStatus.types) ? (
 
@@ -628,7 +669,7 @@ function App() {
 														Languages
 													</h5>
 												</div>
-												<div id="collapseLanguages" className="collapse show" aria-labelledby="headerLanguages">
+												<div id="collapseLanguages" className="collapse" aria-labelledby="headerLanguages">
 													<div className="card-body">
 														<table className="table" id="LangTable">
 															<thead>
@@ -659,6 +700,25 @@ function App() {
 											</div>
 										</div>
 									</div>
+									
+									<div className="row">
+										<div className="col">
+											<div className="card mb-4">
+												<div className="card-header mb-0 pb-0" id="headeractivity" data-toggle="collapse" data-target="#collapseActivity" aria-expanded="true" aria-controls="collapseActivity">
+													<h5>
+														Activity
+													</h5>
+												</div>
+												<div id="collapseActivity" className="collapse" aria-labelledby="headeractivity">
+													<div className="card-body">
+													<div className="row" dangerouslySetInnerHTML={{ __html: activityDiv }}>
+														</div>													
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
 
 								</div>
 							</section >

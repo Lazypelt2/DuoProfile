@@ -24,10 +24,6 @@ a.navbar-brand {
     text-align: center;
 }
 
-.border-bottom {
-    /*    border-bottom: 1px solid #58CC02 !important;
-*/
-}
 
 .bg-white {
     /*    background-color: #58CC02 !important;
@@ -41,22 +37,6 @@ a.navbar-brand {
 }
 
 
-/* Provide sufficient contrast against white background */
-a {
-    color: #9aff8b;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: #58CC02;
-    border-color: #1861ac;
-}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -174,4 +154,15 @@ section {
 .svgFlag{
     height: 40px;
     width: 75px;
+}
+
+.btn-outline-primary {
+    cursor: pointer;
+    background: rgba(83, 183, 202, 0.80);
+    border-radius: 16px;
+    color: #fff
+}
+
+a {
+    color: #9aff8b;
 }

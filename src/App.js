@@ -76,7 +76,7 @@ function buildLangTableDiv(courses) {
 				toLang: LangString[c.learningLanguage.toLowerCase()] ? LangString[c.learningLanguage.toLowerCase()] : c.learningLanguage.toUpperCase(),
 				fromLang: LangString[c.fromLanguage.toLowerCase()] ? LangString[c.fromLanguage.toLowerCase()] : c.fromLanguage.toUpperCase(),
 				toFlag:
-					`<svg class="svgFlag" viewBox="10 ${66 * (FlagSVG[c.learningLanguage.toLowerCase()] ? FlagSVG[c.learningLanguage.toLowerCase()] : FlagSVG["world"])} 25 66">
+					`<svg class="svgFlag" viewBox="10 ${66 * ((FlagSVG[c.learningLanguage.toLowerCase()]  || FlagSVG[c.learningLanguage.toLowerCase()] === 0) ? FlagSVG[c.learningLanguage.toLowerCase()] : FlagSVG["world"])} 25 66">
 						<image
 							height="3168"
 							href="https://d35aaqx5ub95lt.cloudfront.net/vendor/87938207afff1598611ba626a8c4827c.svg"
@@ -107,9 +107,7 @@ function buildLangTableDiv(courses) {
 		{ label: "XP", accessor: "xp", sortable: true, sortbyOrder: "desc" },
 	];
 
-	result = <Table data={tableCourses} columns={columns} />
-
-	return result;
+	return <Table data={tableCourses} columns={columns} />;
 }
 
 
@@ -196,7 +194,7 @@ const LangString = {
 	"da": "Danish",
 	"hv": "High Valyrian",
 	"ro": "Romanian",
-	"sw": "Swedish",
+	"sw": "Swahili",
 	"eo": "Esperanto",
 	"hu": "Hungarian",
 	"cy": "Welsh",
